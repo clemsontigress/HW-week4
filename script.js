@@ -3,9 +3,7 @@ $(document).ready(function(){
     var i = 0
     var score = 0;
     var secondsLeft = 60
-    //var storedScores;
-    //var scoreList = [];
-    //var quest = $("#question") 
+    var storedScores;
     var ansOne = $("#answerOne")
     var ansTwo = $("#answerTwo")
     var ansThree = $("#answerThree")
@@ -75,34 +73,31 @@ $(document).ready(function(){
     };
 
         //Start questions
-        //grab question spot and make put in text
-
         function questionEnd() {
             var scoreTag = document.createElement("h1");
             var inputTag = document.createElement("input");
             var submitButton = document.createElement("button");
             score += secondsLeft * .1;
-            score = score.toFixed(2);
             $("#question").text("Finished!");
             ansOne.remove();
             ansTwo.remove();
             ansThree.remove();
             ansFour.remove();
             document.body.children[1].appendChild(scoreTag);
-            scoreTag.attr("id", "score");
-            $("#score").text("Your Score: " + score);
+            document.getElementsByTagName("h1")[0].setAttribute("id", "score");
+            document.getElementById("score").textContent = "Your Score: " + score;
             document.body.children[1].appendChild(inputTag);
-            inputTag.attr("id", "input-field");
-            submitButton.text("Submit");
+            document.getElementsByTagName("input")[0].setAttribute("id", "input-field");
+            submitButton.textContent = "Submit";
             document.body.children[1].appendChild(submitButton);
-        //submitButton.click(function (event) {
-          //  event.preventDefault();
-          //  var highScoreText = new Object();
-          //  highScoreText.name = inputTag.value.trim();
-          //  highScoreText.newScore = score;
-          //  storeScores(highScoreText);
-          //  window.location.href = "highScores.html";
-           // });
+            submitButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            var highScoreText = new Object();
+            highScoreText.name = inputTag.value.trim();
+            highScoreText.newScore = score;
+            storedScores(highScoreText);
+            window.location.href = "highScores.html";
+            });
         }
         
         function questionStart() { 
@@ -129,7 +124,7 @@ $(document).ready(function(){
     $("#startButton").on("click", setTime);
     $("#startButton").on("click", questionStart);
     $("#startButton").on("click", function () {
-        $("#message").hide()});
+        $("#Intro").hide()});
 
     answerOne.hidden = true;
     answerTwo.hidden = true;
