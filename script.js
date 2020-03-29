@@ -2,9 +2,10 @@ $(document).ready(function(){
 
     var i = 0
     var score = 0;
+    var secondsLeft = 60
     //var storedScores;
     //var scoreList = [];
-    var quest = $("#question") 
+    //var quest = $("#question") 
     var ansOne = $("#answerOne")
     var ansTwo = $("#answerTwo")
     var ansThree = $("#answerThree")
@@ -53,7 +54,7 @@ $(document).ready(function(){
     //Timer function
     function setTime(){
     var myVar = setInterval(timeInterval, 1000)
-    var secondsLeft = 5;  
+    var secondsLeft = 60;  
         
         function timeInterval() {
 
@@ -65,7 +66,7 @@ $(document).ready(function(){
          if (secondsLeft === 0) {
             clearInterval(myVar);
             setTimeout(function() {alert("Time's Up!");}, 1000);
-            }
+            questionEnd();}
             else if (i === questions.length) {
             clearInterval(myVar);
             };
@@ -124,16 +125,76 @@ $(document).ready(function(){
         };
     };
     
+    //Events
     $("#startButton").on("click", setTime);
     $("#startButton").on("click", questionStart);
     $("#startButton").on("click", function () {
-        $(messageDiv).hide()});
+        $("#message").hide()});
 
     answerOne.hidden = true;
     answerTwo.hidden = true;
     answerThree.hidden = true;
     answerFour.hidden = true;
 
+    $("#answerOne").on("click", function () {
+        if (questions[i]["choices"][0] === questions[i]["answer"]) {
+            alert("Correct!");
+            score++;
+            
+        }
+        else {
+            alert("Wrong!");
+            secondsLeft -= 10;
+            
+        }
+        i++;
+        questionStart();
+    })
+    
+    $("#answerTwo").on("click", function () {
+        if (questions[i]["choices"][1] === questions[i]["answer"]) {
+            alert("Correct!");
+            score++;
+            
+        }
+        else {
+            alert("Wrong!");
+            secondsLeft -= 10;
+            
+        }
+        i++;
+        questionStart();
+    })
+    
+    $("#answerThree").on("click", function () {
+        if (questions[i]["choices"][2] === questions[i]["answer"]) {
+            alert("Correct!");
+            score++;
+            
+        }
+        else {
+            alert("Wrong!");
+            secondsLeft -= 10;
+            
+        }
+        i++;
+        questionStart();
+    })
+    
+    $("#answerFour").on("click", function () {
+        if (questions[i]["choices"][3] === questions[i]["answer"]) {
+            alert("Correct!");
+            score++;
+            
+        }
+        else {
+            alert("Wrong!");
+            secondsLeft -= 10;
+            
+        }
+        i++;
+        questionStart();
+    })
 
 });
 
