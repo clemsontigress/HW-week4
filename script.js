@@ -127,8 +127,6 @@ $(document).ready(function(){
     answerFour.hidden = true;
 
     $("#answerOne").on("click", function () {
-       var score = 0
-       var secondsLeft = 60
 
         if (questions[i]["choices"][0] === questions[i]["answer"]) {
             alert("Correct!");
