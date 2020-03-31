@@ -3,11 +3,11 @@ $(document).ready(function(){
     var i = 0
     var score = 0;
     var secondsLeft = 60
-    var storedScores;
     var ansOne = $("#answerOne")
     var ansTwo = $("#answerTwo")
     var ansThree = $("#answerThree")
     var ansFour = $("#answerFour")
+   
     
 
     //Questions stored in object:
@@ -33,9 +33,9 @@ $(document).ready(function(){
           answer: "alert('Hello World')"
         },
         {
-          title: "How do you call a function called myFunction?",
-          choices: ["myFunction()", "call myFunction()", "call function myFunction", "call select myFunction"],
-          answer: "myFunction()"
+          title: "How do you declare a JavaScript variable?",
+          choices: ["var carName", "v carName", "variable carName", "function carName()"],
+          answer: "var carName"
         },
         {
           title: "How do you write an IF statement in JavaScript?",
@@ -43,9 +43,9 @@ $(document).ready(function(){
           answer: "if(i == 5)"
         },
         {
-          title: "How does a while loop start?",
-          choices: ["while i between 0 and 10", "while (i <= 10; i++)", "while (i <= 10)", "while i <= 10"],
-          answer: "while (i <= 10)"
+          title: "How does a for loop start?",
+          choices: ["for (i = 0; i <= 5; i++)", "for (i <= 5; i++)", "for i = 1 to 5", "for (i=0; i <=5 )"],
+          answer: "for (i = 0; i <= 5; i++)"
         }
       ]
    
@@ -72,12 +72,11 @@ $(document).ready(function(){
         return (myVar) 
     };
 
-        //Start questions
+        //Start/End questions
         function questionEnd() {
             var scoreTag = document.createElement("h1");
             var inputTag = document.createElement("input");
             var submitButton = document.createElement("button");
-            score += secondsLeft * .1;
             $("#question").text("Finished!");
             ansOne.remove();
             ansTwo.remove();
@@ -85,28 +84,24 @@ $(document).ready(function(){
             ansFour.remove();
             document.body.children[1].appendChild(scoreTag);
             document.getElementsByTagName("h1")[0].setAttribute("id", "score");
-            document.getElementById("score").textContent = "Your Score: " + score;
-            document.body.children[1].appendChild(inputTag);
+            document.getElementById("yourScore").textContent = "Your Score: " + score;
+            document.body.children[3].appendChild(inputTag);
             document.getElementsByTagName("input")[0].setAttribute("id", "input-field");
             submitButton.textContent = "Submit";
-            document.body.children[1].appendChild(submitButton);
+            document.body.children[3].appendChild(submitButton);
             submitButton.addEventListener("click", function (event) {
             event.preventDefault();
-            var highScoreText = new Object();
-            highScoreText.name = inputTag.value.trim();
-            highScoreText.newScore = score;
-            storedScores(highScoreText);
-            window.location.href = "highScores.html";
             });
         }
         
         function questionStart() { 
-            
+  
             answerOne.hidden = false;
             answerTwo.hidden = false;
             answerThree.hidden = false;
             answerFour.hidden = false;
             startButton.hidden = true
+           
                
         if (i === questions.length) {
             questionEnd();
@@ -132,6 +127,9 @@ $(document).ready(function(){
     answerFour.hidden = true;
 
     $("#answerOne").on("click", function () {
+       var score = 0
+       var secondsLeft = 60
+
         if (questions[i]["choices"][0] === questions[i]["answer"]) {
             alert("Correct!");
             score++;
