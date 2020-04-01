@@ -52,7 +52,6 @@ $(document).ready(function(){
     //Timer function
     function setTime(){
     var myVar = setInterval(timeInterval, 1000)
-    var secondsLeft = 60;  
         
         function timeInterval() {
 
